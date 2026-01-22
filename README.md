@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./images/logo_dani_Dev.svg" alt="Project Logo" width="120">
+  <img src="./images/logo_dani_dev.svg" alt="Project Logo" width="120">
   <h1>MIDI-DANI_DEV</h1>
   <p>
     <strong>Standalone Portable MIDI Controller & Sampler</strong>
