@@ -15,18 +15,12 @@
 </div>
 
 ---
+## 👉 [Click Here to see the project in EasyEDA](https://oshwlab.com/caicedo.daniel.dev/midi_dani_dev)
+---
 
 ## 📢 System Overview
 
 **MIDI-DANI_DEV** is an open-source, portable music production station designed for low-latency performance and high-fidelity sampling. 
-
-Unlike traditional controllers that rely on a single microcontroller to handle everything, this system employs a **Multi-MCU Architecture**. By separating the responsibilities of User Interface (UI), Real-time Control, and Audio Processing, we guarantee distinct power domains, zero UI lag, and pristine audio quality.
-
-### 📐 Design Philosophy
-> *"Function defines Form."*
-
-1.  **Component First:** We define functional blocks with commercial components to establish power and architecture constraints before finalizing mechanical dimensions.
-2.  **Separation of Concerns:** A dedicated "Tri-Core" approach ensures that heavy graphical rendering never interrupts the audio interrupt service routines (ISRs).
 
 ---
 
@@ -37,7 +31,7 @@ This section visualizes the design journey, bridging the gap between the initial
 | ✏️ 1. Ideation (Sketch) | 🔮 2. Vision (Design Target) | 🛠️ 3. Implementation (Current Status) |
 | :---: | :---: | :---: |
 | <img src="./images/sketch_hand.png" width="300"> | <img src="./images/concept_ai.png" width="300"> | <img src="./images/pcb_3d_render.png" width="300"> |
-| *Original hand-drawn schematic defining user inputs and form factor.* | *AI-generated concept used as a reference for CMF (Color, Material, Finish).* | *Actual ECAD/MCAD integration. PCB routing and component placement in KiCad.* |
+| *Original hand-drawn schematic defining user inputs and form factor.* | *AI-generated concept used as a reference for CMF (Color, Material, Finish).* | *Actual ECAD/MCAD integration. PCB routing and component placement in EasyEDA.* |
 
 ---
 
@@ -45,9 +39,9 @@ This section visualizes the design journey, bridging the gap between the initial
 
 The system is distributed across three main processing units:
 
-1.  **UI MCU:** Dedicated solely to driving the TFT display and animations.
+1.  **UI:** display and animations.
 2.  **Main MCU:** Handles logic, sensors (Hall), USB stack, and system state.
-3.  **Audio DSP/MCU:** Manages the codec, signal chain, and Bluetooth streaming.
+3.  **Audio DSP:** Manages the codec, signal chain, and Bluetooth streaming.
 
 ### Block Diagram
 
@@ -72,13 +66,13 @@ The system is distributed across three main processing units:
         Control │                   │ Control
                 ▼                   ▼
 ┌──────────────────────┐   ┌──────────────────────┐
-│   AUDIO MCU / DSP    │   │   Bluetooth Module   │
-│                      │◄──►│   (A2DP / BLE)     │
-│ - Codec Driver       │   │   Wireless Audio     │
+│   AUDIO DSP          │   │   Bluetooth Module   │
+│                      │◄──►│   (BLE)             │
+│ - Codec Driver       │   │   Wireless Control   │
 │ - Signal Routing     │   └──────────────────────┘
 │ - Sampler Engine     │
 └───────────┬──────────┘
-            │ I2S
+            │ 
             ▼
 ┌──────────────────────┐
 │     Audio Codec      │
@@ -115,15 +109,10 @@ The project is organized into numbered directories to separate engineering disci
 
 The device operates in two exclusive audio modes, ensuring signal integrity based on the usage context.
 
-### Mode 1: Active Monitor (Default) 🔊
+### Active Monitor (Default) 🔊
 * **Path:** `DAC` → `Class-D Amplifier` → `Internal Speakers`
 * **Use Case:** Live performance, pad drumming, immediate feedback.
 * **Latency:** Ultra-low (Hardware native).
-
-### Mode 2: Wireless Privacy (Bluetooth) 🎧
-* **Path:** `Audio DSP` → `Bluetooth Module (A2DP)`
-* **Behavior:** Internal speakers are physically muted via hardware switch.
-* **Use Case:** Private production, sample review.
 
 ### Input Stage (Sampling)
 The recording path is always active regardless of the output mode.
@@ -153,7 +142,7 @@ The recording path is always active regardless of the output mode.
 ## 🚀 Roadmap (v0.1)
 
 - [x] **Architecture:** Defined Multi-MCU topology.
-- [x] **Power:** USB-C Dual Role implementation plan.
+- [ ] **Power:** USB-C Dual Role implementation plan.
 - [ ] **Hardware:**
     - [ ] Analog Front End (Mic Preamp) simulation.
     - [ ] Hall Sensor Pad PCB design.
